@@ -12,7 +12,7 @@ Clone the repo and use OpenSCAD to open the [keycap file](https://github.com/jus
 
 Shouldn't this just be a fork? Pseudoku's repo has been forked numerous times and has a long history. I [forked](https://github.com/jusdisgi/PseudoMakeMeKeyCapProfiles) zzeneg's [fork](https://github.com/zzeneg/PseudoMakeMeKeyCapProfiles) in order to adapt some of the profiles to the new Kailh PG1316S switch; I quickly discovered the repo is impractically large, and a good portion of that is because the .git directory has grown to over 1.5GB. Most of the rest was .stl exports.
 
-So I created a new repo with only the files necessary to create the keycaps. Any STLs I make available will be elsewhere (and I will put a link here). So far so good: this repo comes in under 1MB vs >3GB for my real fork.
+So I created a new repo with only the files necessary to create the keycaps. Any STLs I make available will be elsewhere (and I will put a link here). So far so good: this repo comes in under 1MB vs >3GB for a "real" fork.
 
 ## What is actually here then?
 
