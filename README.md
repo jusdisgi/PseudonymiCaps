@@ -2,9 +2,9 @@
 
 ## Keycaps originally by Pseudoku, with additions by zzeneg and others before me.
 
-The original version of these caps was created by Pseudoku, proprietor of ![Asymplex](http://asymplex.xyz/). The original repository is still available ![here](https://github.com/pseudoku/PseudoMakeMeKeyCapProfiles) and there is a wonderful writeup by the creator at ![KBD News](https://kbd.news/On-the-DES-keycap-profile-2229.html).
+The original version of these caps was created by Pseudoku, proprietor of [Asymplex](http://asymplex.xyz/). The original repository is still available [here](https://github.com/pseudoku/PseudoMakeMeKeyCapProfiles) and there is a wonderful writeup by the creator at [KBD News](https://kbd.news/On-the-DES-keycap-profile-2229.html).
 
-That repo has been forked numerous times and has a long history. I forked zzeneg's ![fork](https://github.com/zzeneg/PseudoMakeMeKeyCapProfiles) in order to adapt some of the profiles to the new Kailh PG1316S switch; I quickly discovered the repo is impractically large, and a good portion of that is because the .git directory has grown to over 1.5GB.
+That repo has been forked numerous times and has a long history. I forked zzeneg's [fork](https://github.com/zzeneg/PseudoMakeMeKeyCapProfiles) in order to adapt some of the profiles to the new Kailh PG1316S switch; I quickly discovered the repo is impractically large, and a good portion of that is because the .git directory has grown to over 1.5GB.
 
 So I decided to create a new repo without all that history and with only the files necessary to create the keycaps. Notably this repo does not and will not contain any .stl renderings of the caps. I may create some mesh sets of them in the future, but if I do they will be in a separate repo to keep this one clean.
 
