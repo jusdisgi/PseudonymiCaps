@@ -16,9 +16,9 @@ So I created a new repo with only the files necessary to create the keycaps. Any
 
 ## What is actually here then?
 
-As of this very first commit, the only thing here is my new PG1316S versions of DES (though it will also generate chocs with the right parameters). I will be adding more models as I clean them up and test them.
+At the moment this repo only contains low-profile DES keycaps for Choc v1 and PG1316S switches. Only the 17x17 file labeled PG1316S will support that switch (though it will support Choc as well at that spacing). I will be adding other models (DES for MX, CS, PM, etc.) as I have time to test them out and add comments. I also hope to port over some of the export scripts from some other forks.
 
-If you're familiar with zzeneg's Low-profile Choc DES, these are the same except 0.5mm taller...zzeneg's were so low the PG1316S mounting slot wouldn't fit. A bit ironic that this ultra-low-profile switch needs higher-profile keycaps, but such is life.
+If you're familiar with zzeneg's Low-profile Choc DES, these are the same, except the PG ones are 0.5mm taller...zzeneg's were so low the PG1316S mounting slot wouldn't fit. A bit ironic that this ultra-low-profile switch needs higher-profile keycaps, but such is life.
 
 The rest of this is straight from the original Pseudoku repo's readme:
 
