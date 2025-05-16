@@ -6,7 +6,7 @@ The original version of these caps was created by Pseudoku, proprietor of [Asymp
 
 ## TL;DR 
 
-Clone the repo and use OpenSCAD to open the [keycap file](https://github.com/jusdisgi/PseudonymiCaps/blob/main/PG1316S_DES_17x17.scad), then edit the parameters near the top to generate a keycap. Export to .stl or whatever else.
+Clone the repo and use OpenSCAD to open the keycap file (one of the .scad files not in the libraries dir), then edit the parameters near the top to generate a keycap. Export to .stl or whatever else.
 
 ## But why tho?
 
