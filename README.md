@@ -4,7 +4,7 @@
 
 The original version of these caps was created by Pseudoku, proprietor of [Asymplex](http://asymplex.xyz/). The original repository is still available [here](https://github.com/pseudoku/PseudoMakeMeKeyCapProfiles) and there is a wonderful writeup by the creator at [KBD News](https://kbd.news/On-the-DES-keycap-profile-2229.html).
 
-##TL;DR 
+## TL;DR 
 
 Clone the repo and use OpenSCAD to open the [keycap file](https://github.com/jusdisgi/PseudonymiCaps/blob/main/PG1316S_DES_17x17.scad), then edit the parameters near the top to generate a keycap. Export to .stl or whatever else.
 
