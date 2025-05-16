@@ -16,7 +16,7 @@ So I created a new repo with only the files necessary to create the keycaps. Any
 
 ## What is actually here then?
 
-As of this very first commit, the only things here are my new PG1316S versions of DES (though it will also generate chocs with the right parameters). I will be adding more models as I clean them up and test them.
+As of this very first commit, the only thing here is my new PG1316S versions of DES (though it will also generate chocs with the right parameters). I will be adding more models as I clean them up and test them.
 
 If you're familiar with zzeneg's Low-profile Choc DES, these are the same except 0.5mm taller...zzeneg's were so low the PG1316S mounting slot wouldn't fit. A bit ironic that this ultra-low-profile switch needs higher-profile keycaps, but such is life.
 
