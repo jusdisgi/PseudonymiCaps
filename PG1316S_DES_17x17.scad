@@ -28,7 +28,7 @@ Version 2: Eliptical Rectangle
 // Configure keycap to render here. You probably only want to
 // do one at a time unless your computer is real fast.
 keycap(
-    keyID  = 0, //change profile refer to KeyParameters Struct
+    keyID  = 1, //change profile refer to KeyParameters Struct
     Stem   = false, //Turn on shell and Choc v1 stem.
     PG1316S = true, //Create PG1316S switch mounting slot. 
     Dish   = true, //turn on dish cut
