@@ -12,7 +12,7 @@ use <./libraries/PG1316S_Negative_Space.scad>
 
 /*Tester */
 keycap(
-  keyID  = 1, //change profile refer to KeyParameters Struct
+  keyID  = 4, //change profile refer to KeyParameters Struct
   cutLen = 0, //Don't change. for chopped caps
   Stem   = false, //tusn on shell and stems
   PG1316S = true, //Create PG1316S switch mounting slot.
@@ -22,7 +22,7 @@ keycap(
   visualizeDish = false, // turn on debug visual of Dish
   crossSection  = false, // center cut to check internal
   homeDot = false, //turn on homedots,
-  homeBar = true, //turn on homebar,
+  homeBar = false, //turn on homebar,
   Legends = false
   );
 

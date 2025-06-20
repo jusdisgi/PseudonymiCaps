@@ -86,8 +86,8 @@ dishParameters = //dishParameter[keyID][ParameterID]
 [
 //FFwd1 FFwd2 FPit1 FPit2  DshDep DshHDif FArcIn FArcFn FArcEx     BFwd1 BFwd2 BPit1 BPit2  BArcIn BArcFn BArcEx
   //Column 0
-  [ 4.5,    4,    7,  -50,      7,    1.7,   11.5,    17.5,     2,      4.5,    4,    2,   -35,   11.5,  15,     2], //Chicago Steno R2/R4
-  [ 4.5,    4,    5,  -40,      7,    1.7,   11.5,    15,     2,      4.5,    4,    5,   -40,   11.5,    15,     2], //Chicago Steno R3 flat
+  [ 5.5,    5,    7,  -50,      7,    1.7,   11.5,    17.5,   2,      5.5,    5,    7,   -25,   11.5,  15,     2], //Chicago Steno R2/R4
+  [ 5.5,    5,    5,  -40,      7,    1.7,   11.5,    15,     2,      5.5,    5,    5,   -40,   11.5,    15,     2], //Chicago Steno R3 flat
   [ 4.5,    4,    5,  -40,      7,    1.7,   11.5,    15,     2,      4.5,    4,    5,   -40,   11.5,    15,     2], //Chicago Steno R3 chord
 
   [   6,  3.5,    7,  -50,      5,    1.0,   16,    23,     2,        6,  3.5,    7,   -50,   16,    23,     2], //Levee Steno R2/R4

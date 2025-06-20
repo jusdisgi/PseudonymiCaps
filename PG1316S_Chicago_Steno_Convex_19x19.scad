@@ -9,9 +9,10 @@ use <./libraries/PG1316S_Negative_Space.scad>
 //use <z-butt.scad>
 
 //NOTE: with sweep cuts, top surface may not be visible in review, it should be visible once rendered
-
+//
+//
 mirror([0,0,0])keycap(
-  keyID  = 1, //change profile refer to KeyParameters Struct
+  keyID  = 1, //Currentl only 0 or 1 work. Refer to KeyParameters Struct
   cutLen = 0, //Don't change. for chopped caps
   Stem   = false, //tusn on shell and stems
   PG1316S = true, //Create PG1316S switch mounting slot.
@@ -21,6 +22,7 @@ mirror([0,0,0])keycap(
   visualizeDish = true, // turn on debug visual of Dish
   crossSection  = false, // center cut to check internal
   homeDot = false, //turn on homedots
+  homeBar = true, //turn on homebar
   Legends = false
 );
 
@@ -44,11 +46,13 @@ driftAngle      = 0;
 
 keyParameters = //keyParameters[KeyID][ParameterID]
 [
-//  BotWid, BotLen, TWDif, TLDif, keyh, WSft, LSft  XSkew, YSkew, ZSkew, WEx, LEx, CapR0i, CapR0f, CapR1i, CapR1f, CapREx, StemEx
+//  BotWid, BotLen, TWDif, TLDif,  keyh, WSft, LSft   XSkew,  YSkew, ZSkew,   WEx,  LEx,  CapR0i, CapR0f, CapR1i, CapR1f, CapREx, StemEx
     //Column 0
     //Levee: Chicago in choc Dimension 0-3
-    [18.4,  18.4,   5.6, 	   5,  3.8,    0,  -.5,     7,    -0,    -0,   2, 2,    .10,      3,     .10,      3,     2,       2], //Chicago Steno R2x 1u
-    [18.4,  18.4,   5.6, 	   5,  4.4,    0,   .0,     0,    -0,    -0,   2, 2,    .10,      3,     .10,      3,     2,       2], //Chicago Steno R3x 1u
+    [18.4,  18.4,   6.5, 	  6.5,   4.7,  0,    -1,   7,      -0,    -0,      2,    2,    .3,     3,      .3,     3,      2,       2], //Chicago Steno R2x 1u
+    [18.4,  18.4,   6.5, 	  6.5,   4.5,  0,    .0,    0,      -0,    -0,      2,    2,    .3,     3,      .3,     3,      2,       2], //Chicago Steno R3x 1u
+
+// The rest of these probably don't work right.
 
     // R3x 1.25~2.25u [4:8]
     [23.2,  16.4,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 1.25u
@@ -60,9 +64,9 @@ keyParameters = //keyParameters[KeyID][ParameterID]
 
 dishParameters = //dishParameter[keyID][ParameterID]
 [
-//FFwd1 FFwd2 FPit1    FPit2  DshDepi    DshHDif FArcIn  FArcFn FArcEx  BFwd1 BFwd2 BPit1 BPit2  BArcIn BArcFn BArcEx
-  [   5,  2.3,    2,     -55,    1.5,    3.75,     8.5,    8.5,    2,      5,    3,    2,  -50,    8.5,    8.7 ,     2], //R2x 1u
-  [ 4.5,  3.3,   -3,     -45,    1.5,    3.75,     8.5,    8.7,    2,    4.5,  3.3,   -3,  -45,    8.5,   8.7,     2], //R3x 1u
+//  FFwd1   FFwd2   FPit1  FPit2   DshDepi  DshHDif   FArcIn  FArcFn  FArcEx  BFwd1   BFwd2 BPit1 BPit2  BArcIn BArcFn BArcEx
+  [   5.5,  5,      0,     -55,    1.55,    3.25,     8.5,    8.5,    2,      5.5,    5,    0,    -50,   8.5,   8.7,     2], //R2x 1u
+  [   5.5,  5,     -3,     -45,    1.55,    3.25,     8.5,    8.7,    2,      5.5,    5,   -3,    -45,   8.5,   8.7,     2], //R3x 1u
 
   // R3x 1.25~2.25u [4:8]
   [ 4.5,  3.2,   -7,     -45,    1.5,    3.75,    10.75,   10.95,  2,    4.5,  3.2,   -7,  -45,   10.75,   10.95,  2], //R3x 1.25u
@@ -224,6 +228,7 @@ module keycap(
   Stem = false,
   StemRot = 0, 
   homeDot = false, 
+  homeBar = false,
   Stab = 0
 ) {
 
@@ -293,6 +298,23 @@ module keycap(
 
   //Homing dot
   if(homeDot == true)translate([0,0,KeyHeight(keyID)-DishHeightDif(keyID)-.25])sphere(d = dotRadius);
+
+  if(homeBar == true) {
+    homey = -4.5;
+    //ugly hack...this puts it in the right place on keyID 1, at the moment.
+    homez = KeyHeight(keyID)-0.4;
+    l = 5.5;
+    r = 0.5;
+
+    translate([0, homey, homez])
+    rotate([0,90,0])
+    translate([0, 0, -l / 2])
+    union () {
+        translate([0, 0, r]) sphere(r = r);
+        translate([0, 0, r])cylinder(h = l -r * 2, r= r);
+        translate([0, 0, l - r])sphere(r = r);
+    };
+  }
 }
 
 //------------------stems
