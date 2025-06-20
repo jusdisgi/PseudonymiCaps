@@ -27,13 +27,14 @@ Version 2: Eliptical Rectangle
 // Configure keycap to render here. You probably only want to
 // do one at a time unless your computer is real fast.
 keycap(
-    keyID  = 43, //change profile refer to KeyParameters Struct
+    keyID  = 1, //change profile refer to KeyParameters Struct
     Stem   = true, //tusn on shell and stems
     Dish   = true, //turn on dish cut
     visualizeDish = false, // turn on debug visual of Dish
     crossSection  = false, // center cut to check internal
     homeDot = false, //turn on homedots
     homeRing = false, //turn on homing rings
+    homeBar = true, //turn on homing bar
     Legends = false
 );
 
@@ -327,6 +328,7 @@ module keycap(
     Legends = false,
     homeDot = false,
     homeRing = false,
+    homeBar = false,
     inner = false,
 ) {
 
@@ -415,6 +417,22 @@ module keycap(
             circle(r = .3, $fn = 100);
         }
     }
+
+  if(homeBar == true) {
+    homey = -4.5;
+    homez = KeyHeight(keyID);
+    l = 5.5;
+    r = 0.5;
+
+    translate([0, homey, homez])
+    rotate([0,90,0])
+    translate([0, 0, -l / 2])
+    union () {
+        translate([0, 0, r]) sphere(r = r);
+        translate([0, 0, r])cylinder(h = l -r * 2, r= r);
+        translate([0, 0, l - r])sphere(r = r);
+    };
+  };
   
 }
 //------------------stems
