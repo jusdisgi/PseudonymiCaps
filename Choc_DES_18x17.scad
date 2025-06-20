@@ -420,7 +420,7 @@ module keycap(
 
   if(homeBar == true) {
     homey = -4.5;
-    homez = KeyHeight(keyID);
+    homez = KeyHeight(keyID)-1;
     l = 5.5;
     r = 0.5;
 
@@ -428,9 +428,9 @@ module keycap(
     rotate([0,90,0])
     translate([0, 0, -l / 2])
     union () {
-        translate([0, 0, r]) sphere(r = r);
-        translate([0, 0, r])cylinder(h = l -r * 2, r= r);
-        translate([0, 0, l - r])sphere(r = r);
+        translate([0, 0, r]) sphere(r = r, $fn = 32);
+        translate([0, 0, r])cylinder(h = l -r * 2, r= r, $fn = 32);
+        translate([0, 0, l - r])sphere(r = r, $fn = 32);
     };
   };
   
