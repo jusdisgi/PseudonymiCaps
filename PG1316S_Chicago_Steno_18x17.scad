@@ -22,7 +22,7 @@ keycap(
   visualizeDish = false, // turn on debug visual of Dish
   crossSection  = false, // center cut to check internal
   homeDot = false, //turn on homedots,
-  homeBar = false, //turn on homebar,
+  homeBar = true, //turn on homebar,
   Legends = false
   );
 

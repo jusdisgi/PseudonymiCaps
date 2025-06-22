@@ -5,7 +5,7 @@ use <./libraries/scad-utils/trajectory.scad>
 use <./libraries/scad-utils/trajectory_path.scad>
 use <./libraries/sweep.scad>
 use <./libraries/skin.scad>
-use <./libraries/PG1316S_Negative_Space.scad>
+use <./libraries/PG1316_Negspace.scad>
 //use <z-butt.scad>
 
 /*DES (Distorted Elliptical Saddle) Sculpted Profile for 6x3 and corne thumb
@@ -30,7 +30,10 @@ Version 2: Eliptical Rectangle
 keycap(
     keyID  = 1, //change profile refer to KeyParameters Struct
     Stem   = false, //Turn on shell and Choc v1 stem.
-    PG1316S = true, //Create PG1316S switch mounting slot. 
+    pg1316_nofoam = true, //Turn on (new) PG1316 mounting slot, without space for foam mod
+    pg1316_foam1 = false, //Turn on PG1316 mounting slot with 1mm foam allowance (need to increase key height)
+    pg1316_foam05 = false, //Turn on PG1316 mounting slot with 0.5mm foam allowance (need more height)
+    pg1316_old = false, //Turn on old "official" PG1316 mounting slot. 
     Dish   = true, //turn on dish cut
     visualizeDish = false, // turn on debug visual of Dish
     crossSection  = false, // center cut to check internal
@@ -183,7 +186,7 @@ dishParameters = //dishParameter[keyID][ParameteID]
   [   6,    3,   -5,  -50,      5,    1.8,  89.7,   105,     2,        6,  3.5,   13,  -50,   89.7,    143,     2], //R5
   //2.00u vert
   [  13,  5.5,    5,  -30,      4,    1.8,   8.5,    12,   1.5,       10,    8,    7,  -10,    8.5,     12,   1.5], //R5
-  [   6,    3,   -5,  -50,      5,    1.8,  79.1,    95,     2,        6,  3.5,   13,  -50,   79.1,    127,     2], //R5
+  [  13,  5.5,   -5,  -50,      5,    1.8,  79.1,    95,     2,       10,    8,   13,  -50,   79.1,    127,     2], //R5
   //edge
   [   6,    3,   18,  -50,      5,    1.8,   8.8,    15,     2,        5,  4.4,    5,  -55,    8.8,    15,     2], //R4
   [   5,  3.5,   10,  -55,      5,    1.8,   8.5,    15,     2,        5,    4,   10,  -55,    8.5,    15,     2], //R3
@@ -382,9 +385,27 @@ module keycap(
       }
 
     }
-    if (PG1316S == true) {
+    if (pg1316_nofoam == true) {
       union() {
-        pg1316s_negspace();
+        pg1316_negspace_nofoam();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_foam1 == true) {
+      union() {
+        pg1316_negspace_foam1();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_foam05 == true) {
+      union() {
+        pg1316_negspace_foam05();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_old == true) {
+      union() {
+        pg1316_negspace_old();
         translate([-10,-10,-20])cube(20);
       }
     }

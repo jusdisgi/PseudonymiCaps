@@ -5,6 +5,7 @@ use <./libraries/scad-utils/trajectory.scad>
 use <./libraries/scad-utils/trajectory_path.scad>
 use <./libraries/sweep.scad>
 use <./libraries/skin.scad>
+use <./libraries/PG1316_Negspace.scad>
 //use <z-butt.scad>
 
 /*DES (Distorted Elliptical Saddle) Sculpted Profile for 6x3 and corne thumb
@@ -27,30 +28,21 @@ Version 2: Eliptical Rectangle
 // Configure keycap to render here. You probably only want to
 // do one at a time unless your computer is real fast.
 keycap(
-    keyID  = 43, //change profile refer to KeyParameters Struct
-    Stem   = true, //tusn on shell and stems
+    keyID  = 48, //change profile refer to KeyParameters Struct
+    Stem   = false, //Turn on shell and Choc v1 stem.
+    pg1316_nofoam = false, //Turn on (new) PG1316 mounting slot, without space for foam mod
+    pg1316_foam1 = false, //Turn on PG1316 mounting slot with 1mm foam allowance (need to increase key height)
+    pg1316_foam05 = true, //Turn on PG1316 mounting slot with 0.5mm foam allowance (need more height)
+    pg1316_old = false, //Turn on old "official" PG1316 mounting slot. 
     Dish   = true, //turn on dish cut
     visualizeDish = false, // turn on debug visual of Dish
     crossSection  = false, // center cut to check internal
     homeDot = false, //turn on homedots
     homeRing = false, //turn on homing rings
-    homeBar = false, //turn on homing bar
     Legends = false
 );
 
 
-//Cheat Sheet: key KeyIDs to know
-//0 Regular bottom alpha row (R4)
-//1 Regular home row (R3)
-//2 Regular top alpha row (R2)
-//5 Regular num row (R1)
-//43 Edge R4
-//44 Edge R3
-//45 Edge R2
-//46 Edge R1
-//47 Thumb
-//48 Thumb
-//49 Thumb
 
 //Parameters
 wallthickness = 1.2; // 1.5 for norm, 1.2 for cast master
@@ -68,73 +60,73 @@ heightDelta = -5.25;
 
 keyParameters = //keyParameters[KeyID][ParameterID]
 [
-//  BotWid, BotLen, TWDif, TLDif, keyh, WSft, LSft  XSkew, YSkew, ZSkew, WEx, LEx, CapR0i, CapR0f, CapR1i, CapR1f, CapREx, StemEx
+//BotWid, BotLen, TWDif, TLDif, keyh, WSft, LSft, XSkew, YSkew, ZSkew, WEx, LEx, CapR0i, CapR0f, CapR1i, CapR1f, CapREx, StemEx
 //Column high sculpt 3 row system
-    //0~5
-    [16.4,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //0 R4 8
-    [16.4,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,     4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //1 R3 Home
-    [16.4,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //2 R2
-    [16.4,  15.4,   6.5, 	 4.5, 8.75,    0,    0,     4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //3 R3 deepdish
-    [16.4,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //4 R5 mod
-    [16.4,  15.4,   6.5, 	 4.5, 15.0,    0,  -.5,    20,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //5 R1 num
+//0~5
+[16.4,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//0 R4 8
+[16.4,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//1 R3 Home
+[16.4,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//2 R2
+[16.4,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.00,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//3 R3 deepdish
+[16.4,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//4 R5 mod
+[16.4,	15.40,	6.50,	4.50,	16.0,	0.00,	-0.50, 20.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//5 R1 num
 
-    //1.25u 6~9
-    [20.6,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //6 R5
-    [20.6,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //7 R4  // neuron 3 deg
-    [20.6,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,     4,    -0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //8 R3 Home
-    [20.6,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //9 R2
-    //1.5u 10~13
-    [2,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //10 R5
-    [24.9,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //11 R4
-    [24.9,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,     4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //12 R3 Home
-    [24.9,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //13 R2
-    //1.75u 14~17
-    [29.2,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //14 R5
-    [29.2,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,    -0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //15 R4
-    [29.2,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,     4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //16 R3 Home
-    [29.2,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //17 R2
-    //2.0u  18~22
-    [33.4,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //18 R5
-    [33.4,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //19 R4
-    [33.4,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,     4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //20 R3 Home
-    [33.4,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //21 R2
-    [33.4,  15.4,   6.5, 	 4.5,   15,    0,  -.5,    20,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //22 R1
-    //2.25u 23~26
-    [37.7,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,    -0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //23 R5
-    [37.7,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //24 R4
-    [37.7,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,     4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //25 R3 Home
-    [37.7,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //26 R2
-    //2.50u 27~30
-    [41.9,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //27 R5  // neuron 2deg height to 10.5
-    [41.9,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //28 R4
-    [41.9,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,     4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //29 R3 Home
-    [41.9,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //30 R2
-    //2.75u 31~34
-    [46.2,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //31 R5
-    [46.2,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //32 R4
-    [46.2,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,    -4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //33 R3 Home
-    [46.2,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //34 R2
-    //3.00u 34~37
-    [50.4,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,    -0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //35 R5
-    [50.4,  15.4,   6.5, 	 4.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //36 R4
-    [50.4,  15.4,   6.5, 	 4.5, 8.75,    0,   .5,     4,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //37 R3 Home
-    [50.4,  15.4,   6.5, 	 4.5, 9.75,    0,    0,   -13,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //38 R2
-    //6.25u 39
-    [105.7,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,    -0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //39 R5
-    //7.00u 40
-    [118.4,  15.4,   6.5, 	 4.5, 11.5,    0,    0,    -3,    -0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //40 R5
-    //num pad vert  2u 41
-    [16.4,  33.4,   6.5, 	 6.5,10.00,    0,    0,    -5,     0,     0,   2,   2,      1,      6,      1,    3.5,     2,       2], //41 R4
-    [16.4,  33.4,   6.5, 	 6.5,10.55,    0,    0,     9,     0,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //42 R4
-    //edge 43-46
-    [16.4,  15.4,   6.5, 	 4.5, 11.8,    0,    0,     9,    15,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //43 R4
-    [16.4,  15.4,   6.5, 	 4.5,   10,    0,   .5,     4,    15,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //44 R3
-    [16.4,  15.4,   6.5, 	 4.5,   11,    0,    0,   -13,    15,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //45 R2
-    [16.4,  15.4,   6.5, 	 4.5, 15.3,    0,  -.5,   -20,    15,     0,   2,   2,      1,      5,      1,    3.5,     2,       2], //46 R1 num
-    //thumbs 47-49
-    [16.4,  15.4,     4,     4, 10.5,    0,    0,   -10,    -5,   -10,   2,   2,      1,      5,      1,      2,     2,       2], //47 
-    [16.4,  15.4,     4,   3.5,  9.5,    0,    0,   -10,     0,     0,   2,   2,      1,      5,      1,      3,     2,       2], //48
-    [16.4,  15.4,     4,     4, 10.5,    0,    0,   -10,     8,    10,   2,   2,      1,      5,      1,      2,     2,       2], //49
+//1.25u 6~9
+[20.6,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//6 R5
+[20.6,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//7 R4  // neuron 3 deg
+[20.6,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//8 R3 Home
+[20.6,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//9 R2
+//1.5u 10~13
+[24.9,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//10 R5
+[24.9,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//11 R4
+[24.9,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//12 R3 Home
+[24.9,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//13 R2
+//1.75u 14~17
+[29.2,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//14 R5
+[29.2,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//15 R4
+[29.2,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//16 R3 Home
+[29.2,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//17 R2
+//2.0u  18~22
+[33.4,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//18 R5
+[33.4,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//19 R4
+[33.4,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//20 R3 Home
+[33.4,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//21 R2
+[33.4,	15.40,	6.50,	4.50,	16.0,	0.00,	-0.50, 20.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//22 R1
+//2.25u 23~26
+[37.7,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//23 R5
+[37.7,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//24 R4
+[37.7,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//25 R3 Home
+[37.7,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//26 R2
+//2.50u 27~30
+[41.9,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//27 R5  // neuron 2deg height to 10.5
+[41.9,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//28 R4
+[41.9,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//29 R3 Home
+[41.9,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//30 R2
+//2.75u 31~34
+[46.2,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//31 R5
+[46.2,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//32 R4
+[46.2,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	-4.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//33 R3 Home
+[46.2,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//34 R2
+//3.00u 34~37
+[50.4,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//35 R5
+[50.4,	15.40,	6.50,	4.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//36 R4
+[50.4,	15.40,	6.50,	4.50,	9.75,	  0.00,	0.50,	4.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//37 R3 Home
+[50.4,	15.40,	6.50,	4.50,	10.75,	0.00,	0.00,	-13.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//38 R2
+//6.25u 39
+[105.7,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//39 R5
+//7.00u 40
+[118.4,	15.40,	6.50,	4.50,	12.50,	0.00,	0.00,	-3.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//40 R5
+//num pad vert  2u 41
+[16.4,  33.4,	6.50,	6.50,	11.0,	0.00,	0.00,	-5.00,	0.00,	0.00,	2.00,	2.00,	1.00,	6.00,	1.00,	3.50,	2.00,	2],	//41 R4
+[16.4,  33.4,	6.50,	6.50,	11.55,	0.00,	0.00,	9.00,	  0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//42 R4
+//edge 43-46
+[16.4,  15.4,	6.50,	4.50,	12.80,	0.00,	0.00,	9.00,	  15.0,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//43 R4
+[16.4,  15.4,	6.50,	4.50,	11.0,	0.00,	0.50,	4.00,	  15.0,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//44 R3
+[16.4,  15.4,	6.50,	4.50,	12.0,	0.00,	0.00,	-13.00,	15.0,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//45 R2
+[16.4,  15.4,	6.50,	4.50,	16.30,	0.00,	-0.50, -20.0,	15.0,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.50,	2.00,	2],	//46 R1 num
+//thumbs 47-49
+[16.4,  15.4,	4.00,	4.00,	11.50,	0.00,	0.00,	-10.00,	-5.0,	-10,	2.00,	2.00,	1.00,	5.00,	1.00,	2.00,	2.00,	2],	//47
+[16.4,  15.4,	4.00,	3.50,	10.50,	0.00,	0.00,	-10.00,	0.00,	0.00,	2.00,	2.00,	1.00,	5.00,	1.00,	3.00,	2.00,	2],	//48
+[16.4,  15.4,	4.00,	4.00,	11.50,	0.00,	0.00,	-10.00,	8.00,	10.0,	2.00,	2.00,	1.00,	5.00,	1.00,	2.00,	2.00,	2], //49
 ];
 
 dishParameters = //dishParameter[keyID][ParameteID]
@@ -194,7 +186,7 @@ dishParameters = //dishParameter[keyID][ParameteID]
   [   6,    3,   -5,  -50,      5,    1.8,  89.7,   105,     2,        6,  3.5,   13,  -50,   89.7,    143,     2], //R5
   //2.00u vert
   [  13,  5.5,    5,  -30,      4,    1.8,   8.5,    12,   1.5,       10,    8,    7,  -10,    8.5,     12,   1.5], //R5
-  [   6,    3,   -5,  -50,      5,    1.8,  79.1,    95,     2,        6,  3.5,   13,  -50,   79.1,    127,     2], //R5
+  [  13,  5.5,   -5,  -50,      5,    1.8,  79.1,    95,     2,       10,    8,   13,  -50,   79.1,    127,     2], //R5
   //edge
   [   6,    3,   18,  -50,      5,    1.8,   8.8,    15,     2,        5,  4.4,    5,  -55,    8.8,    15,     2], //R4
   [   5,  3.5,   10,  -55,      5,    1.8,   8.5,    15,     2,        5,    4,   10,  -55,    8.5,    15,     2], //R3
@@ -324,11 +316,11 @@ module keycap(
     visualizeDish = false,
     Dish = true,
     Stem = false,
+    PG1316S = false,
     crossSection = true,
     Legends = false,
     homeDot = false,
     homeRing = false,
-    homeBar = false,
     inner = false,
 ) {
 
@@ -345,52 +337,81 @@ module keycap(
 
   //builds
   difference(){
-    union(){
-      difference(){
-        skin([for (i=[0:layers-1]) transform(translation(CapTranslation(i, keyID)) * rotation(CapRotation(i, keyID)), elliptical_rectangle(CapTransform(i, keyID), b = CapRoundness(i,keyID),fn=fn))]); //outer shell
+    difference(){
+      union(){
+        difference(){
+          skin([for (i=[0:layers-1]) transform(translation(CapTranslation(i, keyID)) * rotation(CapRotation(i, keyID)), elliptical_rectangle(CapTransform(i, keyID), b = CapRoundness(i,keyID),fn=fn))]); //outer shell
 
-        //Cut inner shell
+          //Cut inner shell
+          if (Stem == true) {
+            xScale = (BottomWidth(keyID) -wallthickness*2)/BottomWidth(keyID);
+            yScale = (BottomLength(keyID)-wallthickness*2)/BottomLength(keyID);
+            zScale = (KeyHeight(keyID)-DishHeightDif(keyID)-topthickness)/(KeyHeight(keyID)-DishHeightDif(keyID));
+            translate([0,0,-0.1])scale([xScale,yScale,zScale])keycap(keyID, crossSection = false, inner = true);
+          }
+        }
         if (Stem == true) {
-          xScale = (BottomWidth(keyID) -wallthickness*2)/BottomWidth(keyID);
-          yScale = (BottomLength(keyID)-wallthickness*2)/BottomLength(keyID);
-          zScale = (KeyHeight(keyID)-DishHeightDif(keyID)-topthickness)/(KeyHeight(keyID)-DishHeightDif(keyID));
-          translate([0,0,-0.1])scale([xScale,yScale,zScale])keycap(keyID, crossSection = false, inner = true);
+          choc_stem();
+          difference() {
+            translate([0,0,-.001])skin([for (i=[0:stemLayers-1]) transform(translation(StemTranslation(i,keyID))*rotation(StemRotation(i, keyID)), rounded_rectangle_profile(StemTransform(i, keyID),fn=fn,r=StemRadius(i, keyID)))]); //Transition Support for taller profile
+            cube([BottomWidth(keyID),BottomLength(keyID), stemHeightDelta*2], center=true);
+          }
         }
+
+      //cut for fonts and extra pattern for light?
       }
-      if (Stem == true) {
-        choc_stem();
-        difference() {
-          translate([0,0,-.001])skin([for (i=[0:stemLayers-1]) transform(translation(StemTranslation(i,keyID))*rotation(StemRotation(i, keyID)), rounded_rectangle_profile(StemTransform(i, keyID),fn=fn,r=StemRadius(i, keyID)))]); //Transition Support for taller profile
-          cube([BottomWidth(keyID),BottomLength(keyID), stemHeightDelta*2], center=true);
+
+      //Cuts
+
+      //Fonts
+      if(Legends ==  true){
+  //          #rotate([-XAngleSkew(keyID),YAngleSkew(keyID),ZAngleSkew(keyID)])
+        translate([0,0,KeyHeight(keyID)-5])linear_extrude(height =5)text( text = "A", font = "Calibri:style=Bold", size = 4, valign = "center", halign = "center" );
+        //  #rotate([-XAngleSkew(keyID),YAngleSkew(keyID),ZAngleSkew(keyID)])translate([0,-3.5,0])linear_extrude(height = 0.5)text( text = "Me", font = "Constantia:style=Bold", size = 3, valign = "center", halign = "center" );
         }
+    //Dish Shape
+      if(Dish == true){
+      if(visualizeDish == false){
+        translate([-TopWidShift(keyID),.00001-TopLenShift(keyID),KeyHeight(keyID)-DishHeightDif(keyID)])rotate([0,-YAngleSkew(keyID),0])rotate([0,-90+XAngleSkew(keyID),90-ZAngleSkew(keyID)])skin(FrontCurve);
+        translate([-TopWidShift(keyID),-TopLenShift(keyID),KeyHeight(keyID)-DishHeightDif(keyID)])rotate([0,-YAngleSkew(keyID),0])rotate([0,-90-XAngleSkew(keyID),270-ZAngleSkew(keyID)])skin(BackCurve);
+      } else {
+        #translate([-TopWidShift(keyID),.00001-TopLenShift(keyID),KeyHeight(keyID)-DishHeightDif(keyID)]) rotate([0,-YAngleSkew(keyID),0])rotate([0,-90+XAngleSkew(keyID),90-ZAngleSkew(keyID)])skin(FrontCurve);
+        #translate([-TopWidShift(keyID),-TopLenShift(keyID),KeyHeight(keyID)-DishHeightDif(keyID)])rotate([0,-YAngleSkew(keyID),0])rotate([0,-90-XAngleSkew(keyID),270-ZAngleSkew(keyID)])skin(BackCurve);
       }
-    //cut for fonts and extra pattern for light?
     }
-
-    //Cuts
-
-    //Fonts
-    if(Legends ==  true){
-//          #rotate([-XAngleSkew(keyID),YAngleSkew(keyID),ZAngleSkew(keyID)])
-      translate([0,0,KeyHeight(keyID)-5])linear_extrude(height =5)text( text = "A", font = "Calibri:style=Bold", size = 4, valign = "center", halign = "center" );
-      //  #rotate([-XAngleSkew(keyID),YAngleSkew(keyID),ZAngleSkew(keyID)])translate([0,-3.5,0])linear_extrude(height = 0.5)text( text = "Me", font = "Constantia:style=Bold", size = 3, valign = "center", halign = "center" );
+      if(crossSection == true) {
+        translate([0,-15,-.1])cube([15,30,20]);
+  //      translate([-15.1,-15,-.1])cube([15,30,20]);
       }
-   //Dish Shape
-    if(Dish == true){
-     if(visualizeDish == false){
-      translate([-TopWidShift(keyID),.00001-TopLenShift(keyID),KeyHeight(keyID)-DishHeightDif(keyID)])rotate([0,-YAngleSkew(keyID),0])rotate([0,-90+XAngleSkew(keyID),90-ZAngleSkew(keyID)])skin(FrontCurve);
-      translate([-TopWidShift(keyID),-TopLenShift(keyID),KeyHeight(keyID)-DishHeightDif(keyID)])rotate([0,-YAngleSkew(keyID),0])rotate([0,-90-XAngleSkew(keyID),270-ZAngleSkew(keyID)])skin(BackCurve);
-     } else {
-      #translate([-TopWidShift(keyID),.00001-TopLenShift(keyID),KeyHeight(keyID)-DishHeightDif(keyID)]) rotate([0,-YAngleSkew(keyID),0])rotate([0,-90+XAngleSkew(keyID),90-ZAngleSkew(keyID)])skin(FrontCurve);
-      #translate([-TopWidShift(keyID),-TopLenShift(keyID),KeyHeight(keyID)-DishHeightDif(keyID)])rotate([0,-YAngleSkew(keyID),0])rotate([0,-90-XAngleSkew(keyID),270-ZAngleSkew(keyID)])skin(BackCurve);
-     }
-   }
-     if(crossSection == true) {
-       translate([0,-15,-.1])cube([15,30,20]);
-//      translate([-15.1,-15,-.1])cube([15,30,20]);
-     }
 
+    }
+    if (pg1316_nofoam == true) {
+      union() {
+        pg1316_negspace_nofoam();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_foam1 == true) {
+      union() {
+        pg1316_negspace_foam1();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_foam05 == true) {
+      union() {
+        pg1316_negspace_foam05();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_old == true) {
+      union() {
+        pg1316_negspace_old();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
   }
+
+
   //Homing dot
     if(homeDot == true){
       // center dot
@@ -417,24 +438,9 @@ module keycap(
             circle(r = .3, $fn = 100);
         }
     }
-
-  if(homeBar == true) {
-    homey = -4.5;
-    homez = KeyHeight(keyID)-1;
-    l = 5.5;
-    r = 0.5;
-
-    translate([0, homey, homez])
-    rotate([0,90,0])
-    translate([0, 0, -l / 2])
-    union () {
-        translate([0, 0, r]) sphere(r = r, $fn = 32);
-        translate([0, 0, r])cylinder(h = l -r * 2, r= r, $fn = 32);
-        translate([0, 0, l - r])sphere(r = r, $fn = 32);
-    };
-  };
   
 }
+
 //------------------stems
 module choc_stem(draftAng = 0) {
   stemHeight = 3.1;
