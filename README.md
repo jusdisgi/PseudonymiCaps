@@ -5,10 +5,10 @@
 The original version of these caps was created by Pseudoku, proprietor of [Asymplex](http://asymplex.xyz/). The original repository is still available [here](https://github.com/pseudoku/PseudoMakeMeKeyCapProfiles) and there is a wonderful writeup by the creator at [KBD News](https://kbd.news/On-the-DES-keycap-profile-2229.html).
 
 The versions in this repo are modified to include the rather odd internal cutouts for mounting on PG1316 (and PG1316S) switches. There are 4 such cutouts available, each of which has a parameter in the files:
-pg1316_old: the official cutout shape, as seen in the keycaps Kailh sells. Works great with the switches, but hard to print accurately.
-pg1316_nofoam: an improved, "EZ-Print" cutout designed by Mike Holscher to be easier to 3D print.
-pg1316_foam05: the EZ-Print cutout, but 0.5mm deeper. This allows space for a very thin layer of foam for sound reduction. As a result keycaps need to be 0.5mm taller.
-pg1316_foam1: EZ-Print cutout, 1mm deeper, providing for a thicker foam layer but requiring yet more keycap height.
+-pg1316_old: the official cutout shape, as seen in the keycaps Kailh sells. Works great with the switches, but hard to print accurately.
+-pg1316_nofoam: an improved, "EZ-Print" cutout designed by Mike Holscher to be easier to 3D print.
+-pg1316_foam05: the EZ-Print cutout, but 0.5mm deeper. This allows space for a very thin layer of foam for sound reduction. As a result keycaps need to be 0.5mm taller.
+-pg1316_foam1: EZ-Print cutout, 1mm deeper, providing for a thicker foam layer but requiring yet more keycap height.
 
 There are a couple other odds and ends (my personal choc DES for example) which you can use at your own risk, but understand I am not keeping them in any particular useable order.
 
