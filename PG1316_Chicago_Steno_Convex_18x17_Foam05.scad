@@ -5,8 +5,13 @@ use <./libraries/scad-utils/trajectory.scad>
 use <./libraries/scad-utils/trajectory_path.scad>
 use <./libraries/sweep.scad>
 use <./libraries/skin.scad>
-use <./libraries/PG1316S_Negative_Space.scad>
+use <./libraries/PG1316_Negspace.scad>
 //use <z-butt.scad>
+
+// Chicago Stenographer Convex - 18x17 Spacing - Minimum Z-height Version
+// For Kailh PG1316 / PG1316S Ultra-low-profile Key Switches
+// EZ-Print cutout - different deisgn vs. Kailh keycaps, works better with 3D printers
+// Foam mod - 0.5mm extra cutout depth
 
 //NOTE: with sweep cuts, top surface may not be visible in review, it should be visible once rendered
 
@@ -14,8 +19,11 @@ mirror([0,0,0])keycap(
   keyID  = 1, //change profile refer to KeyParameters Struct
   cutLen = 0, //Don't change. for chopped caps
   Stem   = false, //tusn on shell and stems
-  PG1316S = true, //Create PG1316S switch mounting slot.
   StemRot = 0,//change stem orientation by deg
+  pg1316_nofoam = false, //PG1316 cutout (EZ-print version). Works but taller than necessary
+  pg1316_foam05 = true, //0.5mm foam space. This file's design height.
+  pg1316_foam1 = false, //1mm foam allowance. Not enough height for cutout.
+  pg1316_old = false, //Old "official" PG1316 mounting slot, no foam space.
   Dish   = true, //turn on dish cut
   Stab   = 0,
   visualizeDish = true, // turn on debug visual of Dish
@@ -44,46 +52,25 @@ driftAngle      = 0;
 
 keyParameters = //keyParameters[KeyID][ParameterID]
 [
-//  BotWid, BotLen, TWDif, TLDif, keyh, WSft, LSft  XSkew, YSkew, ZSkew, WEx, LEx, CapR0i, CapR0f, CapR1i, CapR1f, CapREx, StemEx
+//  BotWid, BotLen, TWDif, TLDif, keyh, WSft, LSft  XSkew,  YSkew, ZSkew, WEx, LEx, CapR0i, CapR0f, CapR1i, CapR1f, CapREx, StemEx
     //Column 0
     //Levee: Chicago in choc Dimension 0-3
-    [17.20,  16.00,   5.6, 	   5,  3.8,    0,  -.5,     7,    -0,    -0,   2, 2,    .10,      3,     .10,      3,     2,       2], //Chicago Steno R2x 1u
-    [17.20,  16.00,   5.6, 	   5,  4.4,    0,   .0,     0,    -0,    -0,   2, 2,    .10,      3,     .10,      3,     2,       2], //Chicago Steno R3x 1u
+    [17.4,  16.4,   5.6, 	 5,     4.5,  0,    -.5,  7,      -0,    -0,    2,    2,  .10,    3,     .10,      3,     2,       2], //Chicago Steno R2x 1u
+    [17.4,  16.4,   5.6, 	 5,     4.3,  0,    0.0,  0,      -0,    -0,    2,    2,  .10,    3,     .10,      3,     2,       2], //Chicago Steno R3x 1u
 
     // R3x 1.25~2.25u [4:8]
-    [21.7,   15.60,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 1.25u
-    [26.20,  15.60,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 1.5u
-    [30.70,  15.60,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 1.75u
-    [35.20,  15.60,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 2.0u
-    [39.70,  15.60,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 2.25u
-
-//  original from pseudo, mislabled/ missing params?
-//    [35.85,  15.65,     7, 	   7,  4.4,    0,   .0,     0,    -0,    -0,   2, 2,    .30,      5,     .30,      5,     2,       2], //Chicago Steno R3x 2u
-//    [35.85,  15.65,     7, 	   7,  4.4,    0,   .0,     0,    -0,    -0,   2, 2,    .30,      5,     .30,      5,     2,       2], //Chicago Steno R3x 2u
-//    //mods 3
-//    [17.20,  16.00,  4.25, 	3.25,  5.5,  -.7,  0.7,     0,    -4,    -0,   2,   2,    .10,      2,     .10,      2,     2,       2], //Levee Corner R2
-//    [17.20,  16.00,  4.25, 	3.25,  5.2,  -.8,  0.6,     0,    -4,    -0,   2,   3,    .10,      2,     .10,      2,     2,       2], //Levee Corner R2
-//    //1.25 5
-//    [21.3,   15.60,  5.6, 	   5,  4.5,    0,   .0,     5,    -0,    -0,   2,   2,     .5,      3,      .5,      3,     2,       2], //Chicago Steno R2/R4 1.25u
-//    [21.4,   15.60,  5.6, 	   5,  4.5,    0,   .0,     0,    -0,    -0,   2,   2,     .5,      3,      .5,      3,     2,       2], //Chicago Steno R3 1.25u
-//    //1.5 7
-//    [26.15,  15.60,   5.6, 	   5,  4.5,    0,   .0,     5,    -0,    -0,   2,   2,     .5,      3,      .5,      3,     2,       2], //Chicago Steno R2/R4 1.5
-//    [26.15,  15.60,   5.6, 	   5,  4.5,    0,   .0,     0,    -0,    -0,   2,   2,     .5,      3,      .5,      3,     2,       2], //Chicago Steno R3 1.5u
-//    //1.75 9
-//    [30.90,  15.60,   5.6, 	   5,  4.5,    0,   .0,     5,    -0,    -0,   2,   2,     .5,      3,      .5,      3,     2,       2], //Chicago Steno R2/R4 1.5
-//    [30.90,  15.60,   5.6, 	   5,  4.5,    0,   .0,     0,    -0,    -0,   2,   2,     .5,      3,      .5,      3,     2,       2], //Chicago Steno R3 1.5u
-//    // Ergo shits
-//    [18.75,  18.75,   5.6, 	   5,    8,    0,   .25,     0,    -0,    -0,   2, 2.5,    .10,      3,     .10,      3,     2,       2], //highpro 19.05 R2|4
-//    [17.20,  16.00,   5.6, 	   5,  4.7,    0,   .0,      3,    -0,    -0,   2, 2.5,    .10,      2,     .10,      3,     2,       2], //Chicago Steno R2 ALT
-//    [17.20,  16.00,   5.6, 	   5,  5.5,    0,   .0,      7,    -0,    -0,   2, 2.5,    .10,      2,     .10,      3,     2,       2], //Chicago Steno R1 Steap
-//    [17.20,  16.00,   5.6, 	   5,  7.0,    0,   .0,     10,    -0,    -0,   2, 2.5,    .10,      2,     .10,      3,     2,       2], //Chicago Steno R1 mild with alt R2
+    [21.9,  16.4,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 1.25u
+    [26.4,  16.4,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 1.5u
+    [30.9,  16.4,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 1.75u
+    [35.4,  16.4,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 2.0u
+    [39.9,  16.4,   5.6, 	   5.6,  4.5,   0,   .0,   0,    -0,    -0,   2, 2.5,   .1,      3,     .1,      3,     2,       2], //Chicago Steno R3x 2.25u
 ];
 
 dishParameters = //dishParameter[keyID][ParameterID]
 [
 //FFwd1 FFwd2 FPit1    FPit2  DshDepi    DshHDif FArcIn  FArcFn FArcEx  BFwd1 BFwd2 BPit1 BPit2  BArcIn BArcFn BArcEx
-  [   5,  2.3,    2,     -55,    1.5,    3.75,     8.5,    8.5,    2,      5,    3,    2,  -50,    8.5,    8.7 ,     2], //R2x 1u
-  [ 4.5,  3.3,   -3,     -45,    1.5,    3.75,     8.5,    8.7,    2,    4.5,  3.3,   -3,  -45,    8.5,   8.7,     2], //R3x 1u
+  [   5,  2.3,    2,     -55,    1.5,    3.75,     9.0,    9.0,    2,      5,    3,    2,  -50,    9.0,    9.0,     2], //R2x 1u
+  [ 4.5,  3.3,   -3,     -45,    1.5,    3.75,     9.0,    9.0,    2,    4.5,  3.3,   -3,  -45,    9.0,    9.0,     2], //R3x 1u
 
   // R3x 1.25~2.25u [4:8]
   [ 4.5,  3.2,   -7,     -45,    1.5,    3.75,    10.75,   10.95,  2,    4.5,  3.2,   -7,  -45,   10.75,   10.95,  2], //R3x 1.25u
@@ -242,6 +229,10 @@ module keycap(
   visualizeDish = false, 
   csrossSection = false, 
   Dish = true, 
+  pg1316_nofoam = false,
+  pg1316_foam05 = false,
+  pg1316_foam1 = false,
+  pg1316_old = false,
   Stem = false,
   StemRot = 0, 
   homeDot = false, 
@@ -304,12 +295,30 @@ module keycap(
         translate([0,-15,-.1])cube([15,30,15]);
       }
     }
-      if (PG1316S == true) {
-        union() {
-          pg1316s_negspace();
-          translate([-10,-10,-20])cube(20);
-        }
+    if (pg1316_nofoam == true) {
+      union() {
+        pg1316_negspace_nofoam();
+        translate([-10,-10,-20])cube(20);
       }
+    }
+    if (pg1316_foam1 == true) {
+      union() {
+        pg1316_negspace_foam1();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_foam05 == true) {
+      union() {
+        pg1316_negspace_foam05();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_old == true) {
+      union() {
+        pg1316_negspace_old();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
   }
 
   //Homing dot

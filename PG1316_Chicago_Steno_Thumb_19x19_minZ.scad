@@ -5,17 +5,30 @@ use <./libraries/scad-utils/trajectory.scad>
 use <./libraries/scad-utils/trajectory_path.scad>
 use <./libraries/sweep.scad>
 use <./libraries/skin.scad>
-use <./libraries/PG1316S_Negative_Space.scad>
+use <./libraries/PG1316_Negspace.scad>
 //use <z-butt.scad>
-// Choc Chord version Chicago Stenographer with sculpted Thumb cluter
-// change stemrot
 
-mirror([1,0,0])keycap(
+// Chicago Stenographer Thumbs - 19x19 Spacing - Minimum Z-height Version
+// For Kailh PG1316 / PG1316S Ultra-low-profile Key Switches
+// EZ-Print cutout - different deisgn vs. Kailh keycaps
+// Minimum profile, no foam mod.
+// This height should also work fine with the official Kailh cutout design
+// Just set pg1316_nofoam = false and pg1316_old = true to change
+
+// Main thumb key is keyID = 2
+// 3 is 1.5x length
+// 4-5 are longer
+// 0-2 are references only
+
+mirror([0,0,0])keycap(
   keyID   = 2, //change profile refer to KeyParameters Struct
   cutLen  = 0, //Don't change. for chopped caps
   Stem    = false, //turn on shell and stems
-  PG1316S = true, //turn on PG1316S mounting slot
   StemRot = 0,//change stem orientation by deg
+  pg1316_nofoam = true, //PG1316 cutout (EZ-print version). This file's design height.
+  pg1316_foam05 = false, //0.5mm foam space. keyh in this file too low for cutout.
+  pg1316_foam1 = false, //1mm foam allowance. Not enough height for cutout.
+  pg1316_old = false, //Old "official" PG1316 mounting slot, no foam space. Should work OK.
   Dish    = true, //turn on dish cut
   Stab    = 0,
   visualizeDish = false, // turn on debug visual of Dish
@@ -50,12 +63,12 @@ keyParameters = //keyParameters[KeyID][ParameterID]
 //  BotWid, BotLen, TWDif, TLDif, keyh, WSft, LSft  XSkew, YSkew, ZSkew, WEx, LEx, CapR0i, CapR0f, CapR1i, CapR1f, CapREx, StemEx
     //Column 0
     //Levee: Chicago in choc Dimension for ref
-    [18.40,  18.40,   5.6, 	   5,  5.0,    0,   .0,     5,    -0,    -0,   2, 2.5,    .10,      2,     .10,      3,     2,       2], //Levee Steno R2/R4
-    [18.40,  18.40,   5.6, 	   5,  4.6,    0,   .0,     0,    -0,    -0,   2, 2.5,    .10,      3,     .10,      3,     2,       2], //Levee Steno R3
+    [18.40,  18.40,   5.6, 	   5,  4.1,    0,   .0,     5,    -0,    -0,   2, 2.5,    .10,      2,     .10,      3,     2,       2], //Levee Steno R2/R4
+    [18.40,  18.40,   5.6, 	   5,  3.8,    0,   .0,     0,    -0,    -0,   2, 2.5,    .10,      3,     .10,      3,     2,       2], //Levee Steno R3
     //Thumb
-    [18.40,  18.40,  4.25, 	3.25,  5.0,  -.5,  0.0,    -3,    -3,    -0,   2,   2,    .10,      2,     .10,      2,     2,       2], //Thumb 1
-    [15.65,  26.4,   5.5, 	3.25,  4.9,  -.5,  0.0,    -3,    -2,    -2,   2,   2,     .3,      2,      .3,    2.5,     2,       2], //Thumb 1.5
-    [15.65,  35.8,  4.25, 	3.25,  4.9, -.25,  0.0,    -2.5,    -4,    -2,   2,   3,     .3,      2,      .3,    2.5,     2,       2], //Thumb 2.0
+    [18.40,  18.40,  4.25, 	3.25,  4.1,  -.5,  0.0,    -3,    -3,    -0,   2,   2,    .10,      2,     .10,      2,     2,       2], //Thumb 1
+    [18.40,  26.4,   5.5, 	3.25,  4.1,  -.5,  0.0,    -3,    -2,    -2,   2,   2,     .3,      2,      .3,    2.5,     2,       2], //Thumb 1.5
+    [18.40,  35.8,   4.25, 	3.25,  4.1, -.25,  0.0,    -2.5,    -4,    -2,   2,   3,     .3,      2,      .3,    2.5,     2,       2], //Thumb 2.0
     //1.25 5
     [21.3,   15.60,  5.6, 	   5,  4.5,    0,   .0,     5,    -0,    -0,   2,   2,     .5,      3,      .5,      3,     2,       2], //Chicago Steno R2/R4 1.25u
     [21.4,   15.60,  5.6, 	   5,  4.5,    0,   .0,     0,    -0,    -0,   2,   2,     .5,      3,      .5,      3,     2,       2], //Chicago Steno R3 1.25u
@@ -77,12 +90,12 @@ dishParameters = //dishParameter[keyID][ParameterID]
 [
 //FFwd1  FFwd2  FPit1 FPit2  DshDep DshHDif FArcIn FArcFn FArcEx   BFwd1 BFwd2 BPit1 BPit2  BArcIn BArcFn BArcEx FTani FTanf BTani BTanf TanEX PhiInit PhiFin
   //Column 0
-  [ 4.5,    4,    7,  -50,      7,    1.7,   11,    17,     2,      4.5,    4,    2,   -35,   11,    15,     2,     3,  4.5,    3,  4.5,   2, 203, 210], //Chicago Steno R2/R4
-  [ 4.5,    4,    5,  -40,      7,    1.7,   11,    15,     2,      4.5,    4,    5,   -40,   11,    15,     2,     4,    5,    4,    5,   2, 200, 210], //Chicago Steno R3 flat
+  [ 5.5,    5,    7,  -50,      7,    1.7,   14,    18,     2,      5.5,    5,    2,   -35,   14,    18,     2,     3,  4.5,    3,  4.5,   2, 203, 210], //Chicago Steno R2/R4
+  [ 5.5,    5,    5,  -40,      7,    1.7,   14,    18,     2,      5.5,    5,    5,   -40,   14,    18,     2,     4,    5,    4,    5,   2, 200, 210], //Chicago Steno R3 flat
 
-  [   6,    5,    0,  -40,      7,    1.7,   16,    18,     2,      7,    7,    5,   -50,   16,    18,     2,     5,   4,    2,    4,   2, 199, 210], //T1
-  [  10,  4.5,    0,  -40,      7,    1.7,   16,    15,     2,       10,  3.5,    5,   -50,   16,    18,     2,     3,   3.75,    .75,    3.75,   2, 200, 210], //1.5u
-  [14.5,  4.5,    4,  -40,      7,    1.7,   16,    18,     2,     14.5,  4.5,    2,   -35,   16,    23,     2,     3,   3.75,    .75,    3.75,   2, 200, 210], //2.0u
+  [   6,    5,    0,  -40,      7,    1.7,   17,    19,     2,        7,    7,    5,   -50,   17,    19,     2,     5,   4,    2,    4,   2, 199, 210], //T1
+  [  10,    5,    0,  -40,      7,    1.7,   17,    19,     2,       10,    5,    5,   -50,   17,    19,     2,     3,   3.75,    .75,    3.75,   2, 200, 210], //1.5u
+  [14.5,    5,    4,  -40,      7,    1.7,   17,    19,     2,     14.5,    5,    2,   -35,   17,    23,     2,     3,   3.75,    .75,    3.75,   2, 200, 210], //2.0u
   //1.25
   [ 4.5,    4,    7,  -40,      8,    1.8,   15,    20,     2,      4.5,    4,    2,   -35,   15,    20,     2,     3,    5,    7,    5,   2, 200, 210], //Chicago Steno R2/R4
   [ 4.5,    4,    5,  -40,      8,    1.8,   15,    20,     2,      4.5,    4,    5,   -40,   15,    20,     2,     3,    5,    7,    5,   2, 200, 210], //Chicago Steno R3
@@ -335,6 +348,10 @@ module keycap(
   Stem = false, 
   PG1316S = false,
   StemRot = 0, 
+  pg1316_nofoam = false,
+  pg1316_foam05 = false,
+  pg1316_foam1 = false,
+  pg1316_old = false,
   homeDot = false, 
   Stab = 0, 
   Legends = false) {
@@ -424,12 +441,30 @@ module keycap(
        translate([0,-25,-.1])cube([15,50,15]);
      }
   }
-      if (PG1316S == true) {
-        union() {
-          pg1316s_negspace();
-          translate([-10,-10,-20])cube(20);
-        }
+    if (pg1316_nofoam == true) {
+      union() {
+        pg1316_negspace_nofoam();
+        translate([-10,-10,-20])cube(20);
       }
+    }
+    if (pg1316_foam1 == true) {
+      union() {
+        pg1316_negspace_foam1();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_foam05 == true) {
+      union() {
+        pg1316_negspace_foam05();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
+    if (pg1316_old == true) {
+      union() {
+        pg1316_negspace_old();
+        translate([-10,-10,-20])cube(20);
+      }
+    }
   }
   //Homing dot
   if(homeDot == true)translate([0,0,KeyHeight(keyID)-DishHeightDif(keyID)-.25])sphere(d = 1);

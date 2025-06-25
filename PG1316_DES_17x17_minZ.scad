@@ -8,9 +8,12 @@ use <./libraries/skin.scad>
 use <./libraries/PG1316_Negspace.scad>
 //use <z-butt.scad>
 
-/*DES (Distorted Elliptical Saddle) Sculpted Profile for 6x3 and corne thumb
-Version 2: Eliptical Rectangle
-*/
+// DES (Distorted Elliptical Saddle) v2 - 17x17 Spacing - Minimum Z-height
+// For Kailh PG1316 / PG1316S ultra-low-profile keyswitches
+// EZ-Print cutout - different deisgn vs. Kailh keycaps, works better with 3D printers
+// Minimum profile, no foam mod.
+// This height should also work fine with the official Kailh cutout design
+// Just set pg1316_nofoam = false and pg1316_old = true to change
 
 //Cheat Sheet: key KeyIDs to know
 //0 Regular bottom alpha row (R4)
