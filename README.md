@@ -60,9 +60,3 @@ Subtly sculpted choc spaced low profile
 
 ![1.5 + 1](https://raw.githubusercontent.com/pseudoku/PseudoMakeMeKeyCapProfiles/master/Photo/CS_Thumb.png)
 Additional sculpt angle and smoother transitions
-
-### Philadelphia Minimalist
-
-![under](https://raw.githubusercontent.com/pseudoku/PseudoMakeMeKeyCapProfiles/master/Photo/Philadelphia_Minimalist.png)
-Minimal spacing
-Under construction
