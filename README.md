@@ -1,4 +1,4 @@
-# PseudonymiCaps - PG1316 (mostly) KeyCaps
+# PseudonymiCaps - PG1316 (mostly) Keycaps
 
 ## Keycaps originally by Pseudoku, with additions by zzeneg and others before me.
 
