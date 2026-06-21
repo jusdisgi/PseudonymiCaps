@@ -1,0 +1,15 @@
+# Keep this repo SOURCE-ONLY. Generated STL exports live elsewhere.
+# (The cutout meshes in libraries/ ARE source and are intentionally NOT ignored.)
+
+# Batch render output dir (tools/render_sc.sh)
+/stl/
+
+# Stray STL exports at the repo root (test renders, GUI exports)
+/*.stl
+
+# verify_sc.py overlay images
+*_vs_original.png
+
+# OpenSCAD editor noise
+*.bak
+*.scad.swp
