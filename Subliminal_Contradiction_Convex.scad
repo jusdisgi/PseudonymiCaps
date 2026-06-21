@@ -5,7 +5,7 @@ use <./libraries/scad-utils/trajectory.scad>
 use <./libraries/scad-utils/trajectory_path.scad>
 use <./libraries/sweep.scad>
 use <./libraries/skin.scad>
-use <./libraries/PG1316S_Negative_Space.scad>
+use <./libraries/PG1316_Negspace.scad>
 //use <z-butt.scad>
 
 /* ============================================================================
@@ -23,11 +23,20 @@ unit_y = 17;           // key pitch Y
 gap    = 1.6;          // cap footprint = unit*units - gap
 stemType = "PG1316S";  // "PG1316S" | "Choc" | "MX"
 
+pgCutout = "nofoam";   // PG1316 mount cutout (used only when stemType=="PG1316S"):
+                       //   "nofoam" = minimum height (Mike Holscher's EZ-print cutout)
+                       //   "foam05" / "foam1" = quieter foam pocket, auto +0.5 / +1.0 mm height
+                       //   "old" = Kailh's original cutout geometry
+foamLift = (stemType=="PG1316S") ? (pgCutout=="foam05" ? 0.5 : pgCutout=="foam1" ? 1.0 : 0) : 0;
+
 mirror([0,0,0])keycap(
   keyID  = keyID,
   cutLen = 0,
   Stem   = true,
-  PG1316S = (stemType=="PG1316S"),
+  pg1316_nofoam = (stemType=="PG1316S" && pgCutout=="nofoam"),
+    pg1316_foam05 = (stemType=="PG1316S" && pgCutout=="foam05"),
+    pg1316_foam1  = (stemType=="PG1316S" && pgCutout=="foam1"),
+    pg1316_old    = (stemType=="PG1316S" && pgCutout=="old"),
   StemRot = 0,
   Dish   = true,
   Stab   = 0,
@@ -112,7 +121,7 @@ function BottomWidth(keyID)  = unit_x*keyParameters[keyID][0] - gap;  //col0 = w
 function BottomLength(keyID) = unit_y*keyParameters[keyID][1] - gap;  //col1 = length units
 function TopWidthDiff(keyID) = keyParameters[keyID][2];  //
 function TopLenDiff(keyID)   = keyParameters[keyID][3];  //
-function KeyHeight(keyID)    = keyParameters[keyID][4];  //
+function KeyHeight(keyID)    = keyParameters[keyID][4] + foamLift;  //
 function TopWidShift(keyID)  = keyParameters[keyID][5];
 function TopLenShift(keyID)  = keyParameters[keyID][6];
 function XAngleSkew(keyID)   = keyParameters[keyID][7];
@@ -293,12 +302,10 @@ module keycap(
         translate([0,-15,-.1])cube([15,30,15]);
       }
     }
-      if (PG1316S == true) {
-        union() {
-          pg1316s_negspace();
-          translate([-10,-10,-20])cube(20);
-        }
-      }
+      if (pg1316_nofoam == true) { union() { pg1316_negspace_nofoam(); translate([-10,-10,-20])cube(20); } }
+      if (pg1316_foam05 == true) { union() { pg1316_negspace_foam05(); translate([-10,-10,-20])cube(20); } }
+      if (pg1316_foam1 == true) { union() { pg1316_negspace_foam1(); translate([-10,-10,-20])cube(20); } }
+      if (pg1316_old == true) { union() { pg1316_negspace_old(); translate([-10,-10,-20])cube(20); } }
   }
 
   //Homing dot
@@ -406,6 +413,4 @@ function sign_y(i,n) =
 //#translate([0,0,0])cube([14.5, 13.5, 10], center = true); // internal check
 //#translate([0,0,0])cube([17.5, 16.5, 10], center = true); // external check
 //translate([0,17,0])mirror([0,1,0])keycap(keyID = 0, cutLen = 0, Stem =false,  Dish = true, Stab = 0 , visualizeDish = false, crossSection = false, homeDot = false, Legends = false);
-//translate([18,0,0])mirror([0,0,0])keycap(keyID = 0, cutLen = 0, Stem =false,  Dish = true, Stab = 0 , visualizeDish = false, crossSection = false, homeDot = false, Legends = false);
-//n translate([0,19, 0])keycap(keyID = 3, cutLen = 0, Stem =true,  Dish = true, visualizeDish = true, crossSection = true, homeDot = false, Legends = false);
-// translate([0,38, 0])mirror([0,1,0])keycap(keyID = 2, cutLen = 0, Stem =true,  Dish = true, visualizeDish = false, crossSection = true, homeDot = false, Legends = false);
+//translate([18,0,0])mirror([0,0,0])keycap(keyID = 0, cutLen = 0, Stem =false,  Dish = true, Stab = 0 , vis

@@ -35,20 +35,20 @@ use <./libraries/PG1316_Negspace.scad>
    Convex thumb / mod caps live in Subliminal_Contradiction_Convex.scad.
    ============================================================================ */
 
-// >>> PRESET: 16x16 (Choc/PG, tight) <<<  (standalone; just render. Master = Subliminal_Contradiction.scad)
+// >>> PRESET: 17x17 PG1316 + 1.0mm foam (+1.0mm height) <<<  (standalone; just render. Master = Subliminal_Contradiction.scad)
 
 // ----------------------------- USER KNOBS -----------------------------------
 keyID  = 0;            // which row to render (see table above)
 
 // Key spacing (mm). Cap footprint = unit * units - gap.  Common presets:
 //   16, 16  |  17, 17  |  18, 17  |  19.05, 19.05 (MX)
-unit_x = 16;
-unit_y = 16;
-gap    = 1.4;   // 16x16 (Choc/PG, tight): cap = pitch - gap
+unit_x = 17;
+unit_y = 17;
+gap    = 1.6;   // 17x17 PG1316 + 1.0mm foam (+1.0mm height)
 
 stemType = "PG1316S";  // "PG1316S" | "Choc" | "MX"  (PG1316S also fits Choc v1)
 
-pgCutout = "nofoam";   // PG1316 mount cutout (used only when stemType=="PG1316S"):
+pgCutout = "foam1";   // PG1316 mount cutout (used only when stemType=="PG1316S"):
                        //   "nofoam" = minimum height (Mike Holscher's EZ-print cutout)
                        //   "foam05" / "foam1" = quieter foam pocket, auto +0.5 / +1.0 mm height
                        //   "old" = Kailh's original cutout geometry

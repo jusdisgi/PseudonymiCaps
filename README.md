@@ -64,6 +64,10 @@ generated for Choc / PG1316S at low profile and any spacing.
   leans forward), `3`=uniform/flat, plus left-hand reach variants (`4`/`5`/`6`). Homing key =
   render `keyID 0` with `homeDot=true`. Right-hand reach = negate the row's `YSkew` (or mirror).
 - **Thumbs / mods:** `Subliminal_Contradiction_Convex.scad`, sizes 1.0–2.25u + a slanted thumb.
+- **Mount / foam:** every SC file takes a `pgCutout` knob — `"nofoam"` (min height), `"foam05"`,
+  `"foam1"` (quieter, auto +0.5/+1.0 mm height), or `"old"` (Kailh) — using the same
+  `PG1316_Negspace` cutouts as the DES/CS files. Labeled `_Foam05`/`_Foam1` presets exist for
+  17×17 and 18×17; any other spacing just set the knob.
 - See [`docs/SC_RECONSTRUCTION.md`](docs/SC_RECONSTRUCTION.md) for exactly how the shape was
   measured from the originals and fit — and how to verify your renders against them
   (`tools/verify_sc.py`, `tools/render_sc.sh`).
