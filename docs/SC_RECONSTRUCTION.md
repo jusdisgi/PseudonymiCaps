@@ -79,3 +79,38 @@ even less height.
 3. The **19.05 MX-stem validation** preset (`Subliminal_Contradiction_19.05_MXstem_validation.scad`,
    gap 0.99 → 18.06 mm footprint) is built specifically to overlay against Pseudoku's original
    STLs and confirm the reconstructed sculpt matches before trusting the Choc/PG variants.
+
+## Tuning log & open issues (status as of last session)
+
+**Workflow reminder:** tune the **master** (`Subliminal_Contradiction.scad`), then run
+`python3 tools/make_presets.py` to push the change into every preset (including the validation cap).
+Render the **validation cap** (keyID 0) and compare to `STL/1u Row 3.stl` — they share the 18.06 mm
+footprint, so the overlay lines up without rescaling. (Gotcha: editing the master alone does nothing
+to what you render if you render a preset — always re-run make_presets first.)
+
+**Current tuned parameters** (in the master):
+- `heightDelta = 0.5` (rim lift to meet original SC rim height)
+- dish `DishDepth = 7`, `DishHeightDif = 1.8`
+- dish arcs `FArcIn/BArcIn ≈ 9.2–9.5`, `FArcFn/BArcFn ≈ 18–19`
+- body taper `TWDif = 6.5`, `TLDif = 4.5` (DES-proven; a narrower taper widened the top but
+  starved the dish at the corners)
+
+**Best match so far** (validation keyID 0 = R3 home vs `1u Row 3.stl`):
+- Sagittal (front-back): RMS **0.235 mm**, max **0.661 mm**
+- Transverse (left-right): RMS **0.452 mm**, max **0.893 mm**
+
+The central sculpt now tracks the original closely; the deeper dish fixed the earlier shallow-scoop
+gap (sagittal RMS roughly halved from 0.52 → 0.24).
+
+**Open issue — corner flat spots.** At the two raised saddle corners, a patch of undished cap top
+remains (visible as flat triangles in the render). Deepening the dish made it worse: a deeper scoop
+of the same width is narrower near the top rim, so it stops short of the corners, and the higher
+rims expose more shoulder. Directions to try next (render-loop, one at a time):
+1. **Widen the dish reach** — push `FArcFn`/`BArcFn` further (18 → 22+) and/or extend the dish
+   trajectory with `FFwd1/FFwd2` and `BFwd1/BFwd2` so the scoop spans the full top to the corners.
+2. **Sharpen the top corners** — reduce `CapR0f`/`CapR1f` (top corner rounding, currently 5 / 3.5)
+   so there's less rounded shoulder that can't be dished.
+3. Re-check `crossSection = true` after each so the widened/deeper dish doesn't thin the side walls.
+
+Only keyID 0 (R3 home) has been overlay-verified. R2/R4 and the reach/convex caps still need the
+same render-and-compare pass (`1u Row 2.stl`, `1u Row 4.stl`, the Convex STLs) once the dish is dialed.
