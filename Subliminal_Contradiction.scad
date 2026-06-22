@@ -83,7 +83,7 @@ dotRadius     = 0.55;   //home dot size; default 0.55
 stemLayers      = 50; //resolution of stem to cap top transition
 stemHeightDelta = 0.3;
 
-heightDelta = 0;   // SC keyh values are absolute; nudge whole set here
+heightDelta = 0.5;   // SC keyh values are absolute; nudge whole set here
 
 keyParameters = //keyParameters[KeyID][ParameterID]
 [
@@ -101,13 +101,13 @@ keyParameters = //keyParameters[KeyID][ParameterID]
 dishParameters = //dishParameter[keyID][ParameteID]
 [
 //FFwd1 FFwd2 FPit1 FPit2 DshDep DshHDif FArcIn FArcFn FArcEx  BFwd1 BFwd2 BPit1 BPit2 BArcIn BArcFn BArcEx
-  [ 5, 3.5, 10, -55, 5, 1.8, 9.2, 18, 2,   5, 4.0, 10, -55, 9.2, 18, 2], //0 R3 home
-  [ 6, 3.0, 10, -50, 5, 1.8, 9.5, 18, 2,   6, 4.0, 13,  30, 9.5, 19, 2], //1 R2 top
-  [ 6, 3.0, 18, -50, 5, 1.8, 9.5, 18, 2,   5, 4.4,  5, -55, 9.5, 18, 2], //2 R4 bottom
-  [ 5, 3.5, 10, -55, 5, 1.8, 9.2, 18, 2,   5, 4.0, 10, -55, 9.2, 18, 2], //3 R3 uniform
-  [ 6, 3.0, 10, -50, 5, 1.8, 9.5, 18, 2,   6, 4.0, 13,  30, 9.5, 19, 2], //4 R2 reach
-  [ 5, 3.5, 10, -55, 5, 1.8, 9.2, 18, 2,   5, 4.0, 10, -55, 9.2, 18, 2], //5 R3 reach
-  [ 6, 3.0, 18, -50, 5, 1.8, 9.5, 18, 2,   5, 4.4,  5, -55, 9.5, 18, 2], //6 R4 reach
+  [ 5, 3.5, 10, -55, 7, 1.8, 9.2, 18, 2,   5, 4.0, 10, -55, 9.2, 18, 2], //0 R3 home
+  [ 6, 3.0, 10, -50, 7, 1.8, 9.5, 18, 2,   6, 4.0, 13,  30, 9.5, 19, 2], //1 R2 top
+  [ 6, 3.0, 18, -50, 7, 1.8, 9.5, 18, 2,   5, 4.4,  5, -55, 9.5, 18, 2], //2 R4 bottom
+  [ 5, 3.5, 10, -55, 7, 1.8, 9.2, 18, 2,   5, 4.0, 10, -55, 9.2, 18, 2], //3 R3 uniform
+  [ 6, 3.0, 10, -50, 7, 1.8, 9.5, 18, 2,   6, 4.0, 13,  30, 9.5, 19, 2], //4 R2 reach
+  [ 5, 3.5, 10, -55, 7, 1.8, 9.2, 18, 2,   5, 4.0, 10, -55, 9.2, 18, 2], //5 R3 reach
+  [ 6, 3.0, 18, -50, 7, 1.8, 9.5, 18, 2,   5, 4.4,  5, -55, 9.5, 18, 2], //6 R4 reach
 ];
 
 function FrontForward1(keyID) = dishParameters[keyID][0];  //
